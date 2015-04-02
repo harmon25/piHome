@@ -19,6 +19,7 @@ piHome
  - RGB LED(s)
  - DS18B20 Temp Sensor(s)
  - SSD1306 OLED 128x64(s)
+ 
 ### Software Libraries
  - python3??
  - MySQL
