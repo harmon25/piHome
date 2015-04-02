@@ -16,13 +16,15 @@ piHome
  - Raspberry Pi(s) (Multiple)
  - Main Server (Not a Pi, but could be a Pi...)
  - Relay Module(s)
+  - http://www.dx.com/p/jtron-1-channel-opto-isolated-relay-module-isolation-module-black-270934
  - RGB LED(s)
  - DS18B20 Temp Sensor(s)
  - SSD1306 OLED 128x64(s)
- 
+
 ### Software Libraries
- - python3??
+ - python3
  - MySQL
+ - Flask
  - RPI.GPIO Library
  - pi-blaster - PWM on the Raspberry pi - done properly
  - Adafruit SSD1306 Python Library
