@@ -3,7 +3,7 @@
 # @Author: harmoN
 # @Date:   2015-04-02 11:06:12
 # @Last Modified by:   harmoN
-# @Last Modified time: 2015-04-03 01:36:00
+# @Last Modified time: 2015-04-03 02:02:18
 from __future__ import print_function
 import time
 import os.path
@@ -79,12 +79,32 @@ class RGB_LED:
 				self.set_intensity("GREEN", 0)
 		except(KeyboardInterrupt):
 			self.state.get("STATUS")[1] = False
-	'''
-	def pulse(self, scale=50):
-		self.set_intensity("GREEN", 0, 4)
-		self.set_intensity("BLUE", 0, 4)
-		while self.pulsing == True:
-			self.set_intensity("RED", 255, 1)
-			self.set_intensity("RED", 0, 1)
-	'''
+	def pulse(self, alert_level=3):
+		alert_colours = {1:"BLUE",2:"PURPLE", 3:"GREEN",4:"YELLOW", 5:"RED"}
+		self.state.get("STATUS")[0] = True
+		self.state.get("STATUS")[1] = True
+		pulse_colour = alert_colours.get(alert_level)
+		try:
+			if pulse_colour == "PURPLE" or pulse_colour == "YELLOW":
+				if pulse_colour == "YELLOW":
+					while self.state.get("STATUS")[1] == True:
+						self.set_intensity("GREEN", 100)
+						self.set_intensity("GREEN", 255)
+						self.set_intensity("RED", 255)
+						self.set_intensity("RED", 100)
+				else:
+					while self.state.get("STATUS")[1] == True:
+						self.set_intensity("BLUE", 100)
+						self.set_intensity("BLUE", 255)
+						self.set_intensity("RED", 255)
+						self.set_intensity("RED", 100)
+			else: 
+				while self.state.get("STATUS")[1] == True:
+					self.set_intensity(pulse_colour, 255, 1)
+					self.set_intensity(pulse_colour, 25, 1)
+		except(KeyboardInterrupt):
+			self.all_off()
+			self.state.get("STATUS")[0] = False
+			self.state.get("STATUS")[1] = False
+	
 
