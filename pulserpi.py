@@ -34,8 +34,7 @@ def pulse_off(pi, pins=[]):
 		for p in pins:
 			pi.set_PWM_dutycycle(p, i)
 		sleep(0.04)
-	for p in pins:
-		pi.write(p, OFF)
+	return
 
 def pulse_on(pi, pins=[], c=2):
 	if isinstance(pins,int):
@@ -44,6 +43,7 @@ def pulse_on(pi, pins=[], c=2):
 		for p in pins:
 			pi.set_PWM_dutycycle(p, int(PosSinWave(125, i, 1)))
 		sleep(0.05)
+	return
 
 def rgb(pi, pins, c=3):
 	freq = [0.5,1,2]
@@ -51,6 +51,7 @@ def rgb(pi, pins, c=3):
 		for idx, p in enumerate(pins):
 			pi.set_PWM_dutycycle(p, int(PosSinWave(125, i, freq[idx])))
 		sleep(0.05)
+	return
 
 def pulser(pi,pins,queue):
 	qu = queue
@@ -82,7 +83,7 @@ def pulser(pi,pins,queue):
 			elif e == "c":
 				pulse_off(pi, w)
 				pulse_on(pi, c)
-			elif e == "0":
+			elif e == 0 or e =="0":
 				pulse_off(pi, w)
 				break
 			else:
@@ -99,24 +100,39 @@ class notifyLight:
 	'''
 	Notification Light
 	'''
-	def __init__(self, pi=""):
+	def __init__(self, pis=[]):
 		p = set_pins()
+		self.ON = False
 		self.RGB = p
-		self.pi =  pigpio.pi(pi)
 		self.queue = Queue()
+		self.piList = []
+		for pi in pis:
+			self.piList.append(pigpio.pi(pi))
 	
 	def change_pins(self,r, g, b):
 		self.RGB = set_pins(r,g,b)
 
 	def event(self, e=None):
-		self.queue.put(e)
+		for pi in self.piList:
+			self.queue.put(e)
 
 	def stop(self):
-		self.queue.put("000")
+		self.ON = False
+		for pi in self.piList:
+			self.queue.put("0")
+	
+	def deinit(self):
+		for pi in self.piList:
+			pi.stop()
 
 	def run(self):
-		p = Process(target=pulser, args=(self.pi,self.RGB,self.queue,), daemon=True)
-		p.start()
+		self.ON = True
+		procList = []
+		for pi in self.piList:
+			procList.append(Process(target=pulser, args=(pi, self.RGB, self.queue,) , daemon=True))
+		for p in procList:
+			p.start()
+		
 
 		
 		
