@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 
+piHome/static/bower_components/
+
 # C extensions
 *.so
 

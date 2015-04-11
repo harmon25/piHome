@@ -1,0 +1,27 @@
+{
+  "name": "piHome",
+  "version": "0.0.1",
+  "homepage": "https://github.com/harmon25/piHome",
+  "authors": [
+    "harmoN <nomraharmon@gmail.com>"
+  ],
+  "description": "piHome UI",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "raspberrypi"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "master",
+    "angular": "1.3.15"
+  }
+}
