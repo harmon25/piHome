@@ -7,6 +7,13 @@
 from flask import Flask
 
 app = Flask(__name__)
+
 app.config.from_object('piHome.config')
 
-import piHome.api, piHome.views
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+import piHome.views
