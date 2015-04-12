@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<md-card ng-controller="LoginCtrl">
+<md-card-content>
+ <h2 class="md-title">Login</h2>
+ <br>
+
+ <md-divider> </md-divider>
+
+ 	<md-card-content>
+ 	 <lx-text-field label="Username" fixed-label="true" icon="account">
+                <input type="text" ng-model="creds.username">
+   </lx-text-field>
+
+   <lx-text-field label="Password" fixed-label="true" icon="lock">
+                <input type="password" ng-model="creds.password">
+     </lx-text-field>
+ </md-card-content>
+
+  <md-card-content layout="row" layout-align="end center">
+<button class="btn btn--m btn--white btn--raised" ng-click="login(creds)" lx-ripple>Login</button>
+  </md-card-content>
+</md-card-content>
+</md-card>

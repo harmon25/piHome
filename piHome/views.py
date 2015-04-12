@@ -18,3 +18,20 @@ def index():
 @app.route('/views/login',methods=['GET'])
 def view_login():
     return make_response(open('piHome/templates/views/login.html').read())
+
+@app.route('/views/home',methods=['GET'])
+def view_home():
+    return make_response(open('piHome/templates/views/home.html').read())
+
+@app.route('/views/mngmnt',methods=['GET'])
+def view_mgmt():
+    return make_response(open('piHome/templates/views/mngmnt.html').read())
+
+
+@app.route('/views/stats',methods=['GET'])
+def view_stats():
+    return make_response(open('piHome/templates/views/stats.html').read())
+
+@app.route('/views/control',methods=['GET'])
+def view_contrl():
+    return make_response(open('piHome/templates/views/control.html').read())

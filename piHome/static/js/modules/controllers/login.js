@@ -3,15 +3,15 @@
 angular.module('Auth')
 
 .controller('LoginCtrl',
-    ['$scope', 
-    function ($scope) {
-    var LgnCtrl = this;
+    ['$scope', 'AuthServ',
+    function ($scope, AuthServ) {
 
 
-    LgnCtrl.credentials = {
+    $scope.creds = {
                     username: '',
                     password: '' }
 
+    $scope.login = function(creds) {AuthServ.login(creds)};
   
     
     }])

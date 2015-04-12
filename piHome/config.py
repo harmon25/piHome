@@ -6,5 +6,11 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))   # refers to application_
 APP_STATIC = os.path.join(APP_ROOT, 'static')
 SECRET_KEY = 'development key'
 DEBUG = True
+DB_USER = 'pihome'
+DB_PASS = 'pihome'
+DB_NAME = 'pihome'
+
+SQLALCHEMY_DATABASE_URI = 'postgresql://{}:{}@localhost/{}'.format(DB_USER,DB_PASS,DB_NAME)
+SQLALCHEMY_ECHO = True
 
 JWT_EXPIRATION_DELTA = timedelta(seconds=3000)

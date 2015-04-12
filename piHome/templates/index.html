@@ -1,48 +1,124 @@
 <!DOCTYPE html>
-<html ng-app="piHome">
+<html ng-app="piHome" ng-controller="MainCtrl">
 <head>
 	<meta charset="utf-8" >
 	<base href="/" />
 	<link rel="shortcut icon" href="/static/imgs/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>{{state.current.data.title}}</title>
+	<title ng-bind="data.pageTitle"> </title>
 
 	<!--Imports -->
+	<link rel="stylesheet" href="/static/bower_components/angular-material/angular-material.min.css">
+
  	<link rel="stylesheet" href="/static/bower_components/lumx/dist/lumx.css">
  	<link rel="stylesheet" href="/static/bower_components/mdi/css/materialdesignicons.css">
+ 	
+
+ 	<link rel="stylesheet" href="/static/css/roboto.css?family=Roboto:300,400,500,700">
 
  	<!--Main CSS -->
 	<link rel="stylesheet" href="/static/css/piHome.css">
 </head>
-<body>
+<body ng-cloak > 
 
-<p> Hi!</p>
+<md-toolbar class="bgc-light-blue-800">
+<div class="md-toolbar-tools">	
+ 
+<div class="toolbar__left mr+++" hide-gt-md>
+		<lx-dropdown>
+            <button class="btn btn--l btn--white btn--icon" lx-ripple lx-dropdown-toggle>
+             <i class="mdi mdi-menu"></i>
+            </button>
+			<lx-dropdown-menu>
+                    <ul>
+                        <li><a ui-sref='home' class="dropdown-link">Home</a></li>
+                        <li><a ui-sref='stats' class="dropdown-link">Stats</a></li>
+                        <li><a ui-sref='control' class="dropdown-link">Control</a></li>
+                        <li><a ui-sref='mgmt' class="dropdown-link">Pi Mgmnt</a></li>
+                        <li class="dropdown-divider"></li>
+                    </ul>
+                </lx-dropdown-menu>
+         </lx-dropdown>
+</div>
+<h2 >
+<span hide show-gt-md></span>
+<span >piHome</span>
+</h2>
+<span flex="5"></span>
+
+<div flex>
+<div hide show-gt-md>
+ <button ng-class="{active:isActive('home')}" ui-sref='home' class="btn btn--l btn--white btn--flat" lx-ripple>Home</button>
+ <button ng-class="{active:isActive('stats')}" ui-sref='stats' class="btn btn--l btn--white btn--flat" lx-ripple>Stats</button>
+ <button ng-class="{active:isActive('control')}" ui-sref='control' class="btn btn--l btn--white btn--flat" lx-ripple>Control</button>
+  <button ng-class="{active:isActive('mgmt')}" ui-sref='mgmt' class="btn btn--l btn--white btn--flat" lx-ripple>Pi Mgmnt</button>
+</div>
+</div>
+
+    
+        <div class="toolbar__right">
+            <lx-dropdown position="right" from-top>
+                <button class="btn btn--l btn--white btn--icon" lx-ripple lx-dropdown-toggle>
+                    <i class="mdi mdi-dots-vertical"></i>
+                </button>
+
+                <lx-dropdown-menu>
+                    <ul>
+                        <li><a class="dropdown-link">Action</a></li>
+                        <li><a class="dropdown-link">Something else here</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a class="dropdown-link dropdown-link--is-header">Header</a></li>
+                        <li><a ui-sref='login' class="dropdown-link">Logout</a></li>
+                    </ul>
+                </lx-dropdown-menu>
+            </lx-dropdown>
+        </div>
+    </div>
+
+</md-toolbar> 
+
+
+<div layout-fill >
+
+<md-whiteframe class="md-whiteframe-z4" layout="column" layout-align="space-around center" ui-view>
+<!-- ui-view Main Content  -->
+ </md-whiteframe>
+
+</div>
 
 
 
 
 
 
+
+</body>
 <!--Imports  -->
-<script src="/static/bower_components/jquery/dist/jquery.js"></script>
-<script src="/static/bower_components/velocity/velocity.js"></script>
-<script src="/static/bower_components/moment/min/moment-with-locales.js"></script>
-<script src="/static/bower_components/angular/angular.js"></script>
+<!--Lumx JS DEPS -->
+<script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/static/bower_components/velocity/velocity.min.js"></script>
+<script src="/static/bower_components/moment/min/moment-with-locales.min.js"></script>
+
+<!--Main Angular -->
+<script src="/static/bower_components/angular/angular.min.js"></script>
+
+<!--Other Angular  -->
+<script src="/static/bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="/static/bower_components/angular-aria/angular-aria.min.js"></script>
+
 <script src="/static/bower_components/lumx/dist/lumx.js"></script>
+<script src="/static/bower_components/angular-material/angular-material.min.js"></script>
+
 <script src="/static/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="/static/bower_components/angular-jwt/dist/angular-jwt.min.js"></script>
 <script src="/static/bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
 
-
-<!--Angular App -->
+<!--Angular Main App -->
 <script src="/static/js/piHome.js"></script>
 <script src="/static/js/modules/controllers/login.js"></script>
 <script src="/static/js/modules/controllers/main.js"></script>
 <script src="/static/js/modules/services/auth.js"></script>
-
-</body>
-</html>
 
 
 </html>
