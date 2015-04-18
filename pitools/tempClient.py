@@ -3,25 +3,20 @@
 # @Author: harmoN
 # @Date:   2015-04-01 23:52:22
 # @Last Modified by:   harmoN
-# @Last Modified time: 2015-04-02 02:34:31
+# @Last Modified time: 2015-04-16 19:05:15
 
-import pymysql.cursors
+import psycopg2
 from w1thermsensor import W1ThermSensor
-
+from datetime import datetime
 sensor = W1ThermSensor()
 temp_in_c = sensor.get_temperature()
 temp_in_f = sensor.get_temperature(W1ThermSensor.DEGREES_F)
 
-sensor_id = 1
+conn = psycopg2.connect(database="pihome",user="pihome",password="pihome",host="t400-serv")
+SQL = "INSERT INTO temp (temp,date_time,room_id,pi_id) VALUES (%s, %s, %s, %s);"
+data = (round(temp_in_c,1),datetime.now(), 1, 1)
 
-connection = pymysql.connect(host='192.168.0.220',
-                             user='piClient',
-                             passwd='piPass',
-                             db='piHome',
-                             cursorclass=pymysql.cursors.DictCursor)
-try:
-	with connection.cursor() as cursor:
-		cursor.execute("INSERT INTO `temps` (`timestamp`, `temp`,`sensor_id`) VALUES ({},{},{})".format('NOW()',temp_in_c, sensor_id))
-	connection.commit()
-finally:
-    connection.close()
+cur = conn.cursor()
+cur.execute(SQL,data)
+conn.commit()
+conn.close()

@@ -3,3 +3,7 @@ psycopg2
 Flask-SQLAlchemy
 sqlalchemy-utils
 sqlalchemy
+Flask-JWT
+itsdangerous
+passlib
+phonenumbers
